@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts are loaded with next/font in src/app/layout.tsx
+   (Geist + Jane Caps), exposed as --font-geist / --font-jane. */
+
+/* ============ Base ============ */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Offset for the fixed header so #anchor jumps don't hide under it */
+  scroll-padding-top: 92px;
+}
+
+/* Branded text selection */
+::selection {
+  background: rgba(255, 67, 0, 0.28);
+  color: #fff;
+}
+
+/* Visible keyboard focus (accessibility + polish) */
+:focus-visible {
+  outline: 2px solid rgba(255, 106, 42, 0.9);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+body {
+  background: #000;
+  color: #fefefe;
+  font-family: var(--font-geist), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Gradient text helper (headline accent) */
+.text-gradient {
+  background: linear-gradient(100deg, #ff0000, #ff7800 55%, #ff1e00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ============ Keyframes ============ */
+@keyframes ss-ping {
+  0% { transform: scale(0.5); opacity: 0.5; }
+  80% { opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+@keyframes ss-drift {
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  50% { transform: translateY(-50%) translateX(-14px); }
+}
+@keyframes ss-breathe {
+  0%, 100% { opacity: 0.05; }
+  50% { opacity: 0.12; }
+}
+@keyframes ss-sheen {
+  0% { transform: translateX(-140%) skewX(-18deg); }
+  55%, 100% { transform: translateX(360%) skewX(-18deg); }
+}
+
+/* ============ Auto-looping "seal the leaks" dashboard ============ */
+@property --seal {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+@keyframes ss-seal {
+  0%, 10% { --seal: 0; }
+  46%, 62% { --seal: 1; }
+  98%, 100% { --seal: 0; }
+}
+.ss-seal-loop {
+  animation: ss-seal 8s ease-in-out infinite;
+}
+
+.ss-ping { animation: ss-ping 3.6s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
+.ss-drift { animation: ss-drift 11s ease-in-out infinite; }
+.ss-breathe { animation: ss-breathe 12s ease-in-out infinite; }
+.ss-sheen { animation: ss-sheen 6s ease-in-out infinite; }
+
+/* Reusable soft brand glow (used behind headlines / CTAs for depth) */
+.ss-glow-soft {
+  box-shadow: 0 0 80px rgba(255, 67, 0, 0.18);
+}
+/* Slow, gentle pulse for ambient accents */
+@keyframes ss-pulse {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.04); }
+}
+.ss-pulse { animation: ss-pulse 5.5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
