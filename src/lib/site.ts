@@ -215,7 +215,7 @@ export const content = {
       "Quick wins you can implement immediately",
     ],
     button: "Book Your Free Audit",
-    reassurance: ["No obligation.", "No pressure.", "Just actionable insights."],
+    reassurance: ["Discover what's working.", "Identify what's missing.", "Leave with a practical action plan."],
   },
 
   /* ---- FAQ ----------------------------------------------------------------- */
