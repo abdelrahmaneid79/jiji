@@ -1,0 +1,3 @@
+Master build assembled from uploaded versions.
+Added baseUrl='.' to tsconfig.json to help @/ imports resolve.
+Deploy this version to GitHub/Vercel first.
